@@ -8,11 +8,11 @@ const TodoForm = () => {
     );
     // let [completed, setCompleted] = useState(false);
 
-    const onClick2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         setContent(event.target.value);
     };
 
-    const submissionFunction2 = (event: React.FormEvent) => {
+    const submissionFunction = (event: React.FormEvent) => {
         event.preventDefault();
         if (content.trim()) {
             setTodos([...todos, { content, completed: false }]);
@@ -45,12 +45,12 @@ const TodoForm = () => {
 
     return (
         <>
-            <form onSubmit={submissionFunction2}>
+            <form onSubmit={submissionFunction}>
                 <input
                     type="text"
                     placeholder="Anything up for today"
                     value={content}
-                    onChange={onClick2}
+                    onChange={onClick}
                 />
                 <button className="btn btn-warning">Add</button>
             </form>
