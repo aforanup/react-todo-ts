@@ -1,5 +1,5 @@
 interface Prop {
-    todos: Array<string>;
+    todos: Array<{ content: string; completed: boolean }>;
     deleteFunction: (index: number) => void;
     editFunction: (index: number) => void;
     completeFunction: (index: number) => void;
@@ -25,7 +25,7 @@ const TodoList = ({
                                 cursor: "pointer",
                             }}
                         >
-                            {todo}
+                            {todo.content}
                         </span>
                         <span
                             className="badge text-bg-success"

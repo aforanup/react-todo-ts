@@ -3,7 +3,10 @@ import TodoList from "./TodoList";
 
 const TodoForm = () => {
     let [content, setContent] = useState<string>("");
-    let [todos, setTodos] = useState<{ string?: null; boolean?: false }[]>([]);
+    let [todos, setTodos] = useState<{ content: string; completed: boolean }[]>(
+        []
+    );
+    // let [completed, setCompleted] = useState(false);
 
     const onClick2 = (event: React.ChangeEvent<HTMLInputElement>) => {
         setContent(event.target.value);
@@ -12,7 +15,7 @@ const TodoForm = () => {
     const submissionFunction2 = (event: React.FormEvent) => {
         event.preventDefault();
         if (content.trim()) {
-            setTodos([...todos, content]);
+            setTodos([...todos, { content, completed: false }]);
             setContent("");
         }
     };
@@ -24,10 +27,10 @@ const TodoForm = () => {
     };
 
     const editFunction = (index: number) => {
-        const newTodo = prompt("Edit your todo:", todos[index]);
+        const newTodo = prompt("Edit your todo:", todos[index].content);
         if (newTodo) {
             const updatedTodos = todos.map((todo, i) =>
-                i === index ? newTodo : todo
+                i === index ? { ...todo, content: newTodo } : todo
             );
             setTodos(updatedTodos);
         }
@@ -35,7 +38,7 @@ const TodoForm = () => {
 
     const completeFunction = (index: number) => {
         const updatedTodos = todos.map((todo, i) =>
-            i === index ? `${todo} (completed)` : todo
+            i === index ? { ...todo, completed: !todo.completed } : todo
         );
         setTodos(updatedTodos);
     };
